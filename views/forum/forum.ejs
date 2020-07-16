@@ -1,0 +1,118 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code-Arcade</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,500,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/forum.css" type="text/css">
+</head>
+<body>
+    <div id="forum">
+        <nav class="navbar navbar-expand-lg navbar-dark" id="navbarLandingPage">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">Code Arcade</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/forum/page/1">Forum<span class="sr-only">(Forum)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/contests">Contests<span class="sr-only">(Contests)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/gallery">Gallery<span class="sr-only">(Gallery)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/about">About<span class="sr-only">(About)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/contacts">Contacts<span class="sr-only">(Contacts)</span></a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav">
+                        <% if(currentUser){ %>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"><%= currentUser.username %></a>
+                            </li> 
+                            <li class="nav-item">
+                                <a class="nav-link" href="/signout">Sign Out</a>
+                            </li>
+                        <% }else{ %>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/signin">Sign In</a>
+                            </li> 
+                            <li class="nav-item">
+                                <a class="nav-link" href="/register">Sign Up</a>
+                            </li>
+                        <% } %>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="row" id="content">
+            <div class="col-lg-3">
+            </div>
+            <div class="col-lg-6 p-0" style="border-left:1px solid 	rgb(192,192,192)">
+                <div class="jumbotron m-0">
+                    <h1 style="font-size:27px">All Questions</h1>
+                    <p></p>
+                    <p style="font-size:17px"><%=listOfPosts.length%> questions</p>
+                    <a class="btn btn-primary mt-3 d-block w-25" href="/forum/new" style="margin:0 auto;">Ask Question</a>
+                </div>
+                <% for(var j=((Number(pgno)-1)*15);j<listOfPosts.length;j++){ %>
+                    <% if(j<=((Number(pgno)*15)-1)){ %>
+                        <div class="p-2 mt-1 card shadow bg-white rounded"  id="questions">
+                            <div class="h3" style="font-size:16px">
+                                <a href="/forum/<%= listOfPosts[j]._id %>">Q:<%= listOfPosts[j].title %></a>
+                            </div>
+							<div class="d-none" id="2331">
+								<%-listOfPosts[j].post %>
+							</div>
+                            <div style="font-size:13px">
+                                <p id="forumPostHeader"></p>
+                            </div>
+                            <div>
+                                <button class="btn btn-success btn-sm text-center">
+                                    <h4>0</h4>
+                                    <p class="small">answers</p>
+                                </button>
+                                <div class="d-inline-block" style="margin-left:63%">
+                                    <p class="m-0" style="font-size:12px">asked <%=moment(listOfPosts[j].date).fromNow() %></p>
+                                    <div class="text-right mr-1">
+                                        <i class="fas fa-stamp d-inline"></i>
+                                        <% var sl=listOfPosts[j].author.indexOf('\ '); %>
+                                        <% if(sl==0){ %>
+                                            <%sl=(listOfPosts[j].author.length)-1%>
+                                        <%}%>
+                                        <p class="d-inline-block"><%=listOfPosts[j].author.substring(0,sl) %></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% } %>
+                <% } %>
+            </div>
+            <div class="col-lg-3">
+            </div>
+        </div>
+        <div class="text-center text-white bg-dark m-0" style=" background-image:url('/imgs/forumBG.jpg');">
+            <div>
+                <% for(var i=1;i<=Math.ceil(listOfPosts.length/15);i++){ %>
+                    <% if(Number(pgno)===i){ %>
+                        <a class="btn bg-warning btn-sm" style="height:25px; width:25px; padding:4px 8px;" href="/forum/page/<%= i %>" active><%= i %></a>
+                    <%}else{ %>
+                        <a class="btn btn-sm bg-white btn-sm" style="height:25px; width:25px; padding:4px 8px;" href="/forum/page/<%= i %>"><%= i %></a>
+                    <% } %>
+                <% } %>
+            </div>
+        </div>
+		<script>
+			var str=document.getElementById("2331").textContent.substring(0,195);
+			document.getElementById("forumPostHeader").textContent=str+"...";
+		</script>
+<%- include("../partials/footer") %>

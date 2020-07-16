@@ -1,0 +1,65 @@
+html,body{
+    height:100%;
+    font-family: 'Raleway', sans-serif;
+}
+.navbar-dark .navbar-nav .nav-link{
+    color:rgb(229,229,229,0.9);
+}
+.navbar-dark .navbar-nav .nav-link:hover{
+    color:rgb(255,255,255);
+}   
+#loginPage{
+    background-image:url('../imgs/loginPageBG.jpg');
+    height:100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#loginNav{
+    background: rgb(0,0,0,0.4);
+}
+#signup{
+    padding-top:30px;
+}
+
+#login{
+    background:rgb(0,0,0,0.4);
+    padding:2px;
+    color:white;
+    width:300px;
+    height:450px;
+    margin:50px auto;
+}
+#signup input{
+    background:inherit;
+    border-bottom:2px solid white;
+    border-top:none;
+    border-left: none;
+    border-right: none;
+    outline:none;
+    color:white;
+    width:70%;
+}
+
+#signup h3{
+    font-weight:700;
+}
+::placeholder{
+    color:white;
+}
+
+#signup button{
+    margin-top:70px;
+    background:white;
+    width:50%;
+    margin-bottom:50px;
+}
+
+#login p a{
+    color:#FFFF33;
+}
+
+#login p{
+    font-weight:500;
+}
+
+

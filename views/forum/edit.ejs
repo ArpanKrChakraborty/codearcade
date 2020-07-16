@@ -1,0 +1,73 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code-Arcade</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,500,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/edit.css" type="text/css">
+</head>
+<body>
+    <div id="forum">
+        <nav class="navbar navbar-expand-lg navbar-dark" id="navbarLandingPage">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">Code Arcade</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/forum/page/1">Forum<span class="sr-only">(Forum)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/contests">Contests<span class="sr-only">(Contests)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/gallery">Gallery<span class="sr-only">(gallery)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/about">About<span class="sr-only">(about)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/contacts">Contacts<span class="sr-only">(contacts)</span></a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav">
+                        <% if(currentUser){ %>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"><%= currentUser.username %></a>
+                            </li> 
+                            <li class="nav-item">
+                                <a class="nav-link" href="/signout">Sign Out</a>
+                            </li>
+                        <% }else{ %>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/signin">Sign In</a>
+                            </li> 
+                            <li class="nav-item">
+                                <a class="nav-link" href="/register">Sign Up</a>
+                            </li>
+                        <% } %>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container mt-2" id="post">
+            <form method="POST" action="/forum/<%= post._id %>?_method=PUT" class="pt-5">
+                <div class="form-group">
+                    <label for="author">Author</label>
+                    <input type="text" class="form-control" id="author" value="<%= currentUser.name %>" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="title" class="d-block">Title</label>
+                    <input type="text" name="edit[title]" id="title" required value="<%= post.title %>">
+                </div>
+                <div class="form-group">
+                    <label for="content">Content</label>
+                    <textarea class="form-control" name="edit[post]" id="content" rows="3" required><%=post.post %></textarea>
+                </div>
+                <button class="btn btn-success" role="submit">Submit</button>
+            </form>
+        </div>
+<%- include("../partials/footer") %>

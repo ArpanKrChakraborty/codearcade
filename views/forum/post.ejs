@@ -1,0 +1,87 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Code-Arcade</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Raleway:400,500,700&display=swap" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote-bs4.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote-bs4.min.js"></script>
+        <script src="https://kit.fontawesome.com/06cc510956.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div id="postBG">
+            <nav class="navbar navbar-expand-lg navbar-dark" id="navbarLandingPage">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="/">Code Arcade</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/forum/page/1">Forum<span class="sr-only">(Forum)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/contests">Contests<span class="sr-only">(Contests)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/gallery">Gallery<span class="sr-only">(gallery)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/about">About<span class="sr-only">(about)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/contacts">Contacts<span class="sr-only">(contacts)</span></a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav">
+                            <% if(currentUser){ %>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#"><%= currentUser.username %></a>
+                                </li> 
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/signout">Sign Out</a>
+                                </li>
+                            <% }else{ %>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/signin">Sign In</a>
+                                </li> 
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/register">Sign Up</a>
+                                </li>
+                            <% } %>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="shadow-lg bg-white rounded p-4 mt-5" id="post">
+                <h2 class="text-center">Create A New Post</h1>
+                <form method="POST" action="/forum" class="mt-5">
+                        <label for="author" class="d-inline"><strong>Author :</strong></label>
+                        <input type="text" id="author" value="<%= currentUser.name %>" disabled class="w-50 p-1" style="border-radius: 5px; border:none">
+                        <div style="margin-left:17px">
+                            <label for="title" class="d-inline-block"><strong>Title :</strong></label>
+                            <input type="text" name="title" id="title" required placeholder="A title for your post" class="mt-3 p-1 w-50" style="border:none; border-radius: 5px; background-color:rgb(235, 235, 228);">
+                        </div>
+                        <div class="mt-3">
+                            <label for="content" class="sr-only">Content</label>
+                            <textarea name="data" id="summernote" cols="30" rows="10" required></textarea>
+                        </div>
+                        <button class="btn btn-success d-block btn-lg" style="margin-left:auto; margin-right:auto; margin-top:30px; border-radius: 25px; width:150px" role="submit">Submit</button>
+                </form>
+            </div>
+            <script>
+                $('#summernote').summernote({
+                  placeholder: 'Type your content here.',
+                  tabsize: 2,
+                  height: 150,
+                });
+            </script>
+            <link rel="stylesheet" href="/css/edit.css" type="text/css">
+         </div>
+    </body>
+</html>

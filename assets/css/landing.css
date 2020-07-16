@@ -1,0 +1,28 @@
+/* Giving the background img */
+
+#landing{
+    background-image:url("/imgs/img2.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size:cover;
+    height:100%;
+    width:100%;
+}
+
+/* Setting color of nav-bar */
+
+#navbarLandingPage{
+    background: rgba(0, 0, 0, 0.4)
+}
+
+/* Setting color of the text */
+
+.navbar-dark .navbar-nav .nav-link{
+    color:rgb(229,229,229,0.9);
+}
+
+/* Hover Pseudo-Class */
+.navbar-dark .navbar-nav .nav-link:hover{
+    color:rgb(255,255,255);
+}
+

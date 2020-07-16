@@ -1,0 +1,68 @@
+html,body{
+    height:100%;
+    font-family: 'Raleway', sans-serif;
+}
+#register{
+    background-image:url('../imgs/registerPageBG.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height:100%;
+}
+#navbarLandingPage{
+    background: rgba(0, 0, 0, 0.4)
+}
+.navbar-dark .navbar-nav .nav-link{
+    color:rgb(229,229,229,0.9);
+}
+.navbar-dark .navbar-nav .nav-link:hover{
+    color:rgb(255,255,255);
+}
+
+#registerform{
+    text-align: center;     
+
+}
+
+#registerform input{
+    background:#F8F8F8;
+    border-top:none;
+    border-left:none;
+    border-right:none;
+    border-bottom: 2px solid white;
+    text-align: left;
+    height:44px;
+    margin-bottom:5px;
+    width:250px;
+    padding:0 10px;
+    outline:none;
+}
+#registerform h3{
+    font-weight:500;
+    padding-bottom:25px;
+}
+#overlay{
+    background-image: url(../imgs/registerOverlay.jpg);
+    background-size: cover;
+    background-position: center;
+}
+#registerform button{
+    margin:0 auto;
+    width:200px;
+    border-radius: 20px;
+    margin-top:20px;
+}
+#registerform select{
+    background:#F8F8F8;
+    border-top:none;
+    border-left:none;
+    border-right:none;
+    border-bottom: 2px solid white;
+    text-align: left;
+    height:44px;
+    margin-bottom:5px;
+    width:250px;
+    margin-left:45px;
+    padding:0 10px;
+    outline:none;
+}

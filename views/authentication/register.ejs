@@ -1,0 +1,92 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code-Arcade</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,500,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/register.css" type="text/css">
+</head>
+<body>
+    <div id="register">
+        <nav class="navbar navbar-expand-lg navbar-dark" id="navbarLandingPage">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">Code Arcade</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/forum/page/1">Forum<span class="sr-only">(Forum)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/contests">Contests<span class="sr-only">(Contests)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/gallery">Gallery<span class="sr-only">(gallery)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/about">About<span class="sr-only">(about)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/contacts">Contacts<span class="sr-only">(contacts)</span></a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav">
+                        <% if(currentUser){ %>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"><%= currentUser.username %></a>
+                            </li> 
+                            <li class="nav-item">
+                                <a class="nav-link" href="/signout">Sign Out</a>
+                            </li>
+                        <% }else{ %>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/signin">Sign In</a>
+                            </li> 
+                            <li class="nav-item">
+                                <a class="nav-link" href="/register">Sign Up</a>
+                            </li>
+                        <% } %>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="row shadow bg-white rounded" style="width:635px; margin:0 auto; margin-top:30px;">
+            <div class="col-7" id="registerform">
+                <form method="POST" action="/register" id="signup" class="mt-5">
+                    <h3>Sign Up</h3>
+                        <label for="username" class="d-block sr-only">Username</label>
+                        <input type="text" name="username" id="username" placeholder="Username">
+                        <label for="password" class="d-block sr-only">Password</label>
+                        <input type="password" name="password" id="password" placeholder="Password">
+                        <label for="name" class="d-block sr-only">Name</label>
+                        <input type="text" name="name" id="name" placeholder="Name">
+                        <label for="department" class="d-block sr-only">Department</label>
+                        <select class="form-control" id="department" name="department">
+                            <option>Department</option>
+                            <option>Computer Science And Engineering</option>
+                            <option>Electronics And Communication Engineering</option>
+                            <option>Mechanical Engineering</option>
+                            <option>Electrical Engineering</option>
+                            <option>Civil Engineering</option>
+                        </select>                       
+                        <label for="year" class="d-block sr-only">Year</label>
+                        <select class="form-control" id="year" name="year">
+                            <option>Year</option>
+                            <option>1st</option>
+                            <option>2nd</option>
+                            <option>3rd</option>
+                            <option>4th</option>
+                            <option>Alumni</option>
+                        </select>   
+                        <button class="btn btn-success d-block" role="submit">Sign Up</button>
+                </form>
+            </div>
+            <div class="col-5" id="overlay">
+                
+            </div>
+        </div>
+        
+<%- include("../partials/footer") %>

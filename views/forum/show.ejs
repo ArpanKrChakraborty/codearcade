@@ -1,0 +1,168 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code-Arcade</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link   href="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote-bs4.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote-bs4.min.js"></script>
+    <script src="https://kit.fontawesome.com/06cc510956.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="show">
+        <nav class="navbar navbar-expand-lg navbar-dark" id="navbarLandingPage">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">Code Arcade</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/forum/page/1">Forum<span class="sr-only">(Forum)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/contests">Contests<span class="sr-only">(Contests)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/gallery">Gallery<span class="sr-only">(gallery)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/about">About<span class="sr-only">(about)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/contacts">Contacts<span class="sr-only">(contacts)</span></a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav">
+                        <% if(currentUser){ %>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"><%= currentUser.username %></a>
+                            </li> 
+                            <li class="nav-item">
+                                <a class="nav-link" href="/signout">Sign Out</a>
+                            </li>
+                        <% }else{ %>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/signin">Sign In</a>
+                            </li> 
+                            <li class="nav-item">
+                                <a class="nav-link" href="/register">Sign Up</a>
+                            </li>
+                        <% } %>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="row">
+            <div class="col-2">
+
+            </div>
+            <div class="col-7 pt-5">
+                <div class="card shadow rounded" style="background-color: inherit; color:#222">
+                    <div class="card-body">
+                        <h1 class="card-title"><%= post.title %></h1>
+                        <p class="d-inline-block">Author:<%=post.author%></p>
+                        <div class="float-right">
+                            <%=moment(post.date).fromNow() %>
+                        </div>
+                        <div class="mb-2">
+                            <% if(currentUser){ %>
+                                <% if(currentUser._id.equals(post.user[0]._id)){ %>
+                                    <a class="btn btn-sm btn-warning" href="/forum/<%=post._id%>/edit">Edit</a>
+                                    <form action="/forum/<%=post._id%>?_method=DELETE" method="POST" class="d-inline-block">
+                                        <button class="btn btn-danger btn-sm">Delete</button>
+                                    </form>
+                                <%}%>
+                            <% } %>
+                        </div>
+                        <p class="card-text"><%- post.post %></p>
+                    </div>
+                </div>
+                <btn class="btn btn-secondary mt-3" id="comm">Show Comments</btn>
+                <btn class="btn btn-primary mt-3" id="addComm">Add Comment</btn>
+                <hr>
+                <div id="addComment" class="d-none pt-5">
+                    <div id="editSection"></div>
+                    <form method="POST" action="/forum/<%= post._id %>/comments/new">
+                        <textarea name="data" id="summernote" cols="30" rows="10"></textarea>
+                        <button class="btn btn-success" id="#submit" role="submit">Submit</button>
+                    </form>
+                </div>
+                <div id="showComments" class="d-none">
+                    <% if(post.comments.length!=0){ %>
+                        <% for(var i=0;i<post.comments.length;i++){ %> 
+                            <div class="card shadow rounded mt-3 mb-3" style="background-color:inherit;">
+                                <div class="row">
+                                    <div class="col-1">
+
+                                    </div>
+                                    <div class="col-11">
+                                        <div style="color:#222; font-size:15px;" class="d-inline-block">
+                                            <%=post.comments[i].user %>
+                                        </div>
+                                        <div class="float-right p-2">
+                                            <% if(currentUser) { %>
+                                                <% if(currentUser.username===post.comments[i].user){ %>
+                                                    <a class="btn btn-warning btn-sm" href="#">Edit</a>
+                                                    <a class="btn btn-danger btn-sm">Delete</a>
+                                                <%}%>
+                                            <% } %>
+                                        </div>
+                                        <div id="CommentContent" class="mt-3">
+                                            <%-post.comments[i].comment%>
+                                        </div>
+                                        <div class="float-right p-2">
+                                            <%= moment(post.comments[i].date).fromNow() %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                        <%}%>
+                    <% }else{ %>
+                            <p style="color:#222">No comments to display!</p>
+                    <% } %>
+                </div>
+            </div>
+            <div class="col-3">
+
+            </div>
+        <div>
+        <script>
+            $('#summernote').summernote({
+              placeholder: 'Type here.',
+              tabsize: 2,
+              height: 200,
+            });
+            var btn1=document.getElementById('comm');
+            var x=true;
+            btn1.addEventListener('click',function(){
+                var div1=document.getElementById('showComments');
+                div1.classList.toggle('d-none');
+                if(x){
+                this.textContent="Hide Comments";
+                x=false;
+                window.scrollTo(0,1802);
+                }
+                else{
+                    this.textContent="Show Comments";
+                    x=true;
+                }
+            });
+            var btn2=document.getElementById('addComm');
+            btn2.addEventListener('click',function(){
+                //if(currentUser!=null && currentUser!=undefined){
+                    var div2=document.getElementById('addComment');
+                    div2.classList.toggle('d-none');
+                    window.scrollTo(0,1200);
+                //}
+            });
+        </script>
+        <link rel="stylesheet" type="text/css" href="/css/show.css">
+    </div>
+</body>
+</html>

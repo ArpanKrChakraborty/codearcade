@@ -1,0 +1,72 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code-Arcade</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,500,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/login.css" type="text/css">
+</head>
+<body>
+    <div id="loginPage">
+        <nav class="navbar navbar-expand-lg navbar-dark" id="loginNav">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">Code Arcade</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/forum/page/1">Forum<span class="sr-only">(Forum)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/contests">Contests<span class="sr-only">(Contests)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/gallery">Gallery<span class="sr-only">(gallery)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/about">About<span class="sr-only">(about)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/contacts">Contacts<span class="sr-only">(contacts)</span></a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav">
+                        <% if(currentUser){ %>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"><%= currentUser.username %></a>
+                            </li> 
+                            <li class="nav-item">
+                                <a class="nav-link" href="/signout">Sign Out</a>
+                            </li>
+                        <% }else{ %>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/signin">Sign In</a>
+                            </li> 
+                            <li class="nav-item">
+                                <a class="nav-link" href="/register">Sign Up</a>
+                            </li>
+                        <% } %>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div id="login">
+            <form method="POST" action="/signin" id="signup" class="text-center">
+                <h3>Sign In</h3>
+                <div class="form-group">
+                    <label for="username" class="sr-only">Username</label>
+                    <input type="text" name="username" id="username" placeholder="Username" class="my-3 text-center">
+                </div>
+                <div class="form-group">
+                    <label for="password" class="sr-only">Password</label>
+                    <input type="password" name="password" id="password" placeholder="Password" class="mb-3 text-center">
+                </div>
+                <button class="btn" role="submit">Log In</button>
+            </form>
+            <p class="text-center d-block">Dont have an account?<a href="/register">Sign Up</a></p>
+        </div>
+    
+<%- include("../partials/footer") %>
