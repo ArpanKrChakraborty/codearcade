@@ -1,12 +1,17 @@
-/* Giving the background img */
+html, body {
+    padding: 0 0;
+    height: 100vh;
+    width: 100vw;
+}
+
 
 #landing{
     background-image:url("/imgs/img2.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-size:cover;
-    height:100%;
-    width:100%;
+    height: 100%;
+    width: 100%;
 }
 
 /* Setting color of nav-bar */
@@ -26,3 +31,70 @@
     color:rgb(255,255,255);
 }
 
+#landing-content {
+    margin-top: 30vh;
+    margin-left: 15vw;
+    margin-right: 15vw;
+    overflow: hidden;
+    background-color: rgba(0,0,0,0.7);
+    border-radius: 5px;
+}
+
+#landing-content div {
+    color: white;
+    /* background-color: red; */
+    overflow: hidden;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+#animation1 { 
+    margin-left: 3px;
+    font-weight: bold;
+    font-size: 5vw;
+    animation-duration: 2s;
+    animation-name: type;
+    animation-timing-function: steps(35, end);
+}
+
+#animation2{
+    font-weight: 300;
+    font-size:6vw;
+    animation-duration: 2s;
+    animation-name: cursor_animation;
+    animation-iteration-count: infinite;
+    display:inline-block;
+}
+
+@keyframes type {
+    from {
+        width: 0;
+    }
+    to {
+        width:100%;
+    }
+}
+
+@keyframes cursor_animation {
+    from {
+        color: rgba(0, 0, 0, 0.0)
+    }
+    70%{
+        color: rgba(0, 0, 0, 0.0);
+    }
+    80%{
+        color: rgba(255,255,255,1);
+    }
+    to {
+        color: rgba(255,255,255,1);
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    #animation1{
+        font-size: 5 vw;
+    }
+    #animation2{
+        font-size: 6vw;
+    }
+}

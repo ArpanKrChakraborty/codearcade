@@ -33,7 +33,8 @@ passport.use(new localStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-mongoose.connect("mongodb://localhost:27017/codeArcadeDB",{useNewUrlParser:true,useUnifiedTopology:true});
+// mongoose.connect("mongodb://localhost:27017/codeArcadeDB",{useNewUrlParser:true,useUnifiedTopology:true});
+mongoose.connect("mongodb+srv://arpan:03432567760@memer-destination-db.r79sj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",{useNewUrlParser:true,useUnifiedTopology:true});
 
 // Root Route
 app.get('/',function(req,res){
